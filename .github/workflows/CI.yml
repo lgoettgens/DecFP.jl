@@ -13,20 +13,26 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - "1.7"  # oldest supported version
+          - "min"  # oldest supported version (from Project.toml compat)
           - "1"    # Latest Release
         os:
           - ubuntu-latest
-          - macOS-latest
+          - macOS-15-intel
           - windows-latest
         arch:
           - x64
-          - x86
         exclude:
-          # Test 32-bit only on Linux
-          - os: macOS-latest
+          - os: macOS-15-intel
             arch: x86
-          - os: windows-latest
+        include:
+          - version: "1"
+            os: macos-latest
+            arch: aarch64
+          - version: "1"
+            os: ubuntu-24.04-arm
+            arch: aarch64
+          - version: "1"
+            os: ubuntu-latest
             arch: x86
     steps:
       - uses: actions/checkout@v7
