@@ -21,16 +21,22 @@ jobs:
           - windows-latest
         arch:
           - x64
-        exclude:
-          - os: macOS-15-intel
-            arch: x86
         include:
+          # aarch64 macOS: no Julia 1.7 binaries exist, so latest release only
           - version: "1"
             os: macos-latest
+            arch: aarch64
+          # aarch64 Linux
+          - version: "min"
+            os: ubuntu-24.04-arm
             arch: aarch64
           - version: "1"
             os: ubuntu-24.04-arm
             arch: aarch64
+          # 32-bit Linux
+          - version: "min"
+            os: ubuntu-latest
+            arch: x86
           - version: "1"
             os: ubuntu-latest
             arch: x86
